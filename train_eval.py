@@ -9,7 +9,7 @@ import torchvision
 import torchvision.transforms as transforms
 import torch.optim as optim
 
-def train_model(net, learning_rate, num_epochs):
+def train_model(net, learning_rate, num_epochs, train_loader, test_loader):
     loss, optimizer = net.get_loss(learning_rate)
     print_every = 20
     idx = 0
@@ -71,7 +71,7 @@ def train_model(net, learning_rate, num_epochs):
             total_test_loss / len(test_loader)))
     return train_hist_x, test_hist_x, train_loss_hist, test_loss_hist
 
-def eval_model(net)
+def eval_model(net, test_loader, batch_size):
     net.eval()
     tot_correct = 0
     tot_incorrect = 0
@@ -86,7 +86,7 @@ def eval_model(net)
         inputs, labels = Variable(inputs).to(device), Variable(labels).to(device)
         outputs = net(inputs)
 
-        for i in range(32):
+        for i in range(batch_size):
             tot += 1
             img_tensor = outputs[i, :].cpu().detach().numpy()
             label = labels[i].cpu().detach().numpy()
@@ -103,5 +103,5 @@ def eval_model(net)
                     tot_false_pos += 1
                 else:
                     tot_false_neg += 1
-    return tot_correct, tot_incorrect, tot_false_neg, tot_false_pos, tot_true_pos,
+    return tot_correct, tot_incorrect, tot_false_neg, tot_false_pos, tot_true_pos,\
             tot_true_neg, tot

@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.autograd import Variable
 from torchviz import make_dot
 import torch
-import torch.nn
+import torch.nn as nn
 import torch.optim as optim
 import torchvision
 
