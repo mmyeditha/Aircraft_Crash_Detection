@@ -9,7 +9,7 @@ import torchvision
 import torchvision.transforms as transforms
 import torch.optim as optim
 
-def train_model(net, learning_rate, num_epochs, train_loader, test_loader):
+def train_model(net, learning_rate, num_epochs, train_loader, test_loader, device):
     loss, optimizer = net.get_loss(learning_rate)
     print_every = 20
     idx = 0
@@ -71,7 +71,7 @@ def train_model(net, learning_rate, num_epochs, train_loader, test_loader):
             total_test_loss / len(test_loader)))
     return train_hist_x, test_hist_x, train_loss_hist, test_loss_hist
 
-def eval_model(net, test_loader, batch_size):
+def eval_model(net, test_loader, batch_size, device):
     net.eval()
     tot_correct = 0
     tot_incorrect = 0
